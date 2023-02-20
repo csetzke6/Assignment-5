@@ -59,8 +59,8 @@ fish_length_weight_expository <- fish_no_high_wgt %>%
         geom_point() + 
         ylab("Weight (g)") + 
         xlab("Total length (mm)") + 
-        labs(color="Location", title = "<b> Fish weight increases with length</b><br>
-               <span style = 'font-size:10pt'>Fish at four locations, <span style='color:#41b6c4'>Blind Sucker</span>, <span style='color:#225ea8'>Deer Park </span>, <span style='color:#fd8d3c'>Grand Marais </span>, and <span style='color:#e31a1c'>Little Lake Harbor</span>, have weights that increase with length. </span>") +
+        labs(color="Location", title = "<b> Siscowet Lake Trout weight increases with length in Michigan waters of Lake Superior</b><br>
+               <span style = 'font-size:10pt'>Siscowet Lake Trout at four locations, <span style='color:#41b6c4'>Blind Sucker</span>, <span style='color:#225ea8'>Deer Park </span>, <span style='color:#fd8d3c'>Grand Marais </span>, and <span style='color:#e31a1c'>Little Lake Harbor</span>, have weights that increase with length. </span>") +
         theme_minimal() + 
         scale_color_manual(values=c("#41b6c4", "#225ea8", "#fd8d3c", "#e31a1c")) + 
         theme(

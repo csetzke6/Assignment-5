@@ -1,0 +1,73 @@
+---
+title: "figures"
+author: "Chris_Setzke"
+date: '2023-02-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load in libraries
+```{r}
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+library(tidyr)
+library(ggtext)
+```
+
+Load in the data
+```{r}
+fish <- read.csv('../data/siscowet.csv')
+```
+
+Potential Exploratory Figure: Create violin plots based on length and weight
+```{r}
+## Length
+length <- ggplot(fish, aes(x=locID, y=len, fill = locID)) + 
+  geom_violin(trim=FALSE)
+length1 <- length + scale_fill_manual(values=c('#00429d', '#5681b9', '#93c4d2', '#ffffe0'))
+
+## Weight
+weight <- ggplot(fish, aes(x=locID, y=wgt, fill = locID)) + 
+  geom_violin(trim=FALSE)
+weight1 <- weight + scale_fill_manual(values=c('#00429d', '#5681b9', '#93c4d2', '#ffffe0'))
+length1
+weight1
+```
+
+Another Potential Exploratory Figure
+```{r}
+fish_length_weight_exploritory <-fish %>%
+        ggplot(aes(x=len,y=wgt)) +
+        geom_point()
+```
+
+Expository Figure
+```{r}
+## remove potential outlier
+which(fish$wgt > 15000)
+fish_no_high_wgt <- fish[-541,]
+
+## create figure
+fish_length_weight_expository <- fish_no_high_wgt %>%
+        ggplot(aes(x=len,
+                   y=wgt,
+                   color=locID)) +
+        geom_point() + 
+        ylab("Weight (g)") + 
+        xlab("Total length (mm)") + 
+        labs(color="Location", title = "<b> Fish weight increases with length</b><br>
+               <span style = 'font-size:10pt'>Fish at four locations, <span style='color:#41b6c4'>Blind Sucker</span>, <span style='color:#225ea8'>Deer Park </span>, <span style='color:#fd8d3c'>Grand Marais </span>, and <span style='color:#e31a1c'>Little Lake Harbor</span>, have weights that increase with length. </span>") +
+        theme_minimal() + 
+        scale_color_manual(values=c("#41b6c4", "#225ea8", "#fd8d3c", "#e31a1c")) + 
+        theme(
+                plot.title.position = "plot",
+                  plot.title = element_textbox_simple(size=12),
+              axis.text = element_text(size=14),
+              legend.position = "none")
+```
+
+
